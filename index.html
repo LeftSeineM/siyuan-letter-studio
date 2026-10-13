@@ -12,15 +12,16 @@
   h1 { font-size: 19px; margin: 0; font-weight: 600; }
   header p { margin: 4px 0 0; color: #597079; font-size: 12px; }
   main { display: grid; grid-template-columns: minmax(300px, 380px) minmax(0, 1fr); min-height: calc(100vh - 68px); }
-  aside { background: #fff; border-right: 1px solid #d1d9d7; padding: 22px; overflow: auto; }
+  aside { min-width: 0; background: #fff; border-right: 1px solid #d1d9d7; padding: 22px; overflow: auto; }
   label { display: block; font-size: 13px; font-weight: 600; margin: 18px 0 7px; }
   select, input, textarea { width: 100%; color: #213c46; background: #fff; border: 1px solid #b9c9ca; border-radius: 5px; font: inherit; font-size: 14px; padding: 10px; }
   textarea { min-height: 262px; line-height: 1.8; resize: vertical; }
-  fieldset { border: 0; border-top: 1px solid #d1d9d7; padding: 0; margin: 22px 0 0; }
+  fieldset { min-width: 0; border: 0; border-top: 1px solid #d1d9d7; padding: 0; margin: 22px 0 0; }
   legend { font-size: 14px; font-weight: 600; padding-right: 9px; }
   .settings { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 12px; }
+  .settings > div { min-width: 0; }
   .settings label { margin-top: 12px; }
-  .settings input { font-variant-numeric: tabular-nums; }
+  .settings input { min-width: 0; font-variant-numeric: tabular-nums; }
   .unit { font-weight: normal; color: #647780; }
   .check { display: flex; align-items: center; gap: 8px; font-weight: normal; }
   .check input { width: auto; margin: 0; }
@@ -38,6 +39,7 @@
   .stage { display: flex; align-items: flex-start; justify-content: center; padding: 26px; overflow: auto; }
   svg { display: block; width: min(100%, 630px); height: auto; box-shadow: 0 4px 22px #193b4533; background: #fff; }
   @media (max-width: 800px) { main { display: block; } aside { border-right: 0; border-bottom: 1px solid #d1d9d7; } .stage { padding: 16px; } }
+  @media (max-width: 600px) { header { display: block; padding: 14px 18px; } header .row { margin-top: 12px; } aside { padding: 18px; } }
 </style>
 </head>
 <body>
