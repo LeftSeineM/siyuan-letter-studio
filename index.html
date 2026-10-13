@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>思源计划致谢信 · 排版编辑</title>
+<style>
+  :root { font-family: "Microsoft YaHei", sans-serif; color: #213c46; background: #eef2f1; }
+  * { box-sizing: border-box; }
+  body { margin: 0; }
+  header { background: #fff; border-bottom: 1px solid #d1d9d7; padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; gap: 18px; flex-wrap: wrap; }
+  h1 { font-size: 19px; margin: 0; font-weight: 600; }
+  header p { margin: 4px 0 0; color: #597079; font-size: 12px; }
+  main { display: grid; grid-template-columns: minmax(300px, 380px) minmax(0, 1fr); min-height: calc(100vh - 68px); }
+  aside { background: #fff; border-right: 1px solid #d1d9d7; padding: 22px; overflow: auto; }
+  label { display: block; font-size: 13px; font-weight: 600; margin: 18px 0 7px; }
+  select, input, textarea { width: 100%; color: #213c46; background: #fff; border: 1px solid #b9c9ca; border-radius: 5px; font: inherit; font-size: 14px; padding: 10px; }
+  textarea { min-height: 262px; line-height: 1.8; resize: vertical; }
+  fieldset { border: 0; border-top: 1px solid #d1d9d7; padding: 0; margin: 22px 0 0; }
+  legend { font-size: 14px; font-weight: 600; padding-right: 9px; }
+  .settings { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 12px; }
+  .settings label { margin-top: 12px; }
+  .settings input { font-variant-numeric: tabular-nums; }
+  .unit { font-weight: normal; color: #647780; }
+  .check { display: flex; align-items: center; gap: 8px; font-weight: normal; }
+  .check input { width: auto; margin: 0; }
+  .status { min-height: 34px; margin: 12px 0 0; font-size: 12px; line-height: 1.5; color: #49666d; }
+  .status.error { color: #a5332d; }
+  button:disabled { opacity: .48; cursor: not-allowed; }
+  .row { display: flex; gap: 9px; }
+  .upload { display: flex; align-items: center; gap: 9px; }
+  .upload input { min-width: 0; }
+  .upload button { flex: none; }
+  button { cursor: pointer; border: 1px solid #8ba9ac; background: #fff; color: #214d61; border-radius: 5px; padding: 10px 13px; font: inherit; font-size: 13px; }
+  button.primary { background: #214d61; border-color: #214d61; color: #fff; }
+  .row button { flex: 1; }
+  .note { font-size: 12px; color: #647780; line-height: 1.55; }
+  .stage { display: flex; align-items: flex-start; justify-content: center; padding: 26px; overflow: auto; }
+  svg { display: block; width: min(100%, 630px); height: auto; box-shadow: 0 4px 22px #193b4533; background: #fff; }
+  @media (max-width: 800px) { main { display: block; } aside { border-right: 0; border-bottom: 1px solid #d1d9d7; } .stage { padding: 16px; } }
+</style>
+</head>
+<body>
+<header><div><h1>思源计划 · 致谢信</h1><p>上传底图，编辑文字，导出成品</p></div><div class="row"><button id="svgSave">导出 SVG</button><button id="pngSave" class="primary">导出 PNG</button></div></header>
+<main>
+  <aside>
+    <label for="role">对象</label><select id="role"><option value="donor">捐赠人 · 米色</option><option value="mentor">导师 · 青色</option></select>
+    <label for="backgroundFile">背景图</label><div class="upload"><input id="backgroundFile" type="file" accept="image/png,image/jpeg,image/webp"><button id="clearBackground" type="button">移除</button></div>
+    <p id="backgroundName" class="note">当前使用内置底图</p>
+    <label for="style">字体</label><select id="style"><option value="lishu">隶书</option><option value="kaishu">楷书</option><option value="xingkai">行楷</option></select>
+    <fieldset><legend>文字边界</legend>
+      <div class="settings">
+        <div><label for="top">上 <span class="unit">px</span></label><input id="top" type="number" min="0" max="800" step="1"></div>
+        <div><label for="bottom">下 <span class="unit">px</span></label><input id="bottom" type="number" min="0" max="800" step="1"></div>
+        <div><label for="left">左 <span class="unit">px</span></label><input id="left" type="number" min="0" max="500" step="1"></div>
+        <div><label for="right">右 <span class="unit">px</span></label><input id="right" type="number" min="0" max="500" step="1"></div>
+      </div>
+      <label class="check"><input id="showGuides" type="checkbox" checked>预览边界线</label>
+    </fieldset>
+    <fieldset><legend>字号与行距</legend>
+      <div class="settings">
+        <div><label for="salutationSize">称谓字号</label><input id="salutationSize" type="number" min="16" max="90" step="1"></div>
+        <div><label for="bodySize">正文字号</label><input id="bodySize" type="number" min="16" max="90" step="1"></div>
+        <div><label for="signatureSize">落款字号</label><input id="signatureSize" type="number" min="16" max="90" step="1"></div>
+        <div><label for="lineSpacing">正文行距 <span class="unit">px</span></label><input id="lineSpacing" type="number" min="24" max="150" step="1"></div>
+      </div>
+    </fieldset>
+    <label for="salutation">称谓</label><input id="salutation">
+    <label for="body">正文（每行一段，可用 Tab 缩进）</label><textarea id="body"></textarea>
+    <label for="signature">落款（每行一段）</label><textarea id="signature" style="min-height:116px"></textarea>
+    <div class="row"><button id="reset">恢复此版本初始设置</button></div>
+    <div class="row"><button id="saveDraft">保存草稿</button><button id="loadDraft">打开草稿</button><input id="draftFile" type="file" accept="application/json,.json" hidden></div>
+    <p id="status" class="status" role="status"></p>
+    <p class="note">边界以 1080 × 1443 画面像素为单位。上传图片只在本地浏览器处理。保存草稿会把背景图一起写入 JSON，供下次继续编辑。</p>
+  </aside>
+  <div class="stage"><svg id="art" xmlns="http://www.w3.org/2000/svg" width="1080" height="1443" viewBox="0 0 1080 1443" aria-label="致谢信预览"></svg></div>
+</main>
+<script>
+const initialImages = {donor: '', mentor: ''};
+const images = {...initialImages};
+const imageNames = {donor: initialImages.donor ? '内置底图' : '未选择背景图', mentor: initialImages.mentor ? '内置底图' : '未选择背景图'};
+const defaults = {
+  donor: {salutation:'尊敬的***学长/学姐',body:'感谢您心系母校，慷慨襄助思源计划。\n一份托举，汇入长流；一颗种子，生发新枝。\n您曾给予青年的信任与支持，\n正由一代代思源人带向更远的地方。\n饮水思源，服务社会。\n谨致谢忱，愿善意长流，薪火相传。'},
+  mentor: {salutation:'尊敬的***导师',body:'感谢您担任思源导师，\n以阅历启发思考，以陪伴回应成长，\n将人生的经验、选择与担当倾囊相授。\n您曾为青年照亮前路，\n也让“饮水思源，服务社会”的信念\n在一次次交流与陪伴中薪火相传。\n谨致谢忱，愿师友之谊常青，思源之志长续。'}
+};
+const defaultSignature = '共青团清华大学委员会\n清华企业家协会（TEEC）\n2026年10月';
+const families = {lishu:'LiSu',kaishu:'KaiTi',xingkai:'STXingkai'};
+const $ = id => document.getElementById(id);
+const saved = {};
+const textFields=['salutation','body','signature'];
+const numericFields=['top','bottom','left','right','salutationSize','bodySize','signatureSize','lineSpacing'];
+const initial = role => ({...defaults[role],signature:defaultSignature,top:310,bottom:209,left:148,right:146,salutationSize:39,bodySize:35,signatureSize:30,lineSpacing:role==='donor'?69:66});
+const split = text => text.replace(/\r\n?/g,'\n').split('\n');
+function remember() {saved[$('role').value]=Object.fromEntries([...textFields,...numericFields].map(id=>[id,$(id).value]));}
+function load(role) {let d=saved[role]||initial(role); for(let key of [...textFields,...numericFields]) $(key).value=d[key]; $('backgroundName').textContent=imageNames[role];$('backgroundFile').value=''; draw();}
+function node(name,attrs={},value='') {let e=document.createElementNS('http://www.w3.org/2000/svg',name); for(let [k,v] of Object.entries(attrs)) e.setAttribute(k,v);if(name==='text'){e.setAttributeNS('http://www.w3.org/XML/1998/namespace','xml:space','preserve');e.style.whiteSpace='pre';}e.textContent=value; return e;}
+function wrapLine(line,group,x,y,size,limit,step) {
+  if (!line) return 1;
+  let text='',row=0;
+  for (const char of line) {
+    const probe=node('text',{x,y:y+row*step,'font-size':size},text+char);
+    group.append(probe);
+    const fits=probe.getComputedTextLength()<=limit;
+    probe.remove();
+    if (!fits && text) {group.append(node('text',{x,y:y+row*step,'font-size':size},text));text=char;row++;}
+    else text+=char;
+  }
+  if (text) group.append(node('text',{x,y:y+row*step,'font-size':size},text));
+  return row+1;
+}
+function draw() {
+  const role=$('role').value, style=$('style').value, art=$('art');
+  art.replaceChildren();
+  if (images[role]) art.append(node('image',{href:images[role],width:1080,height:1443,preserveAspectRatio:'none'}));
+  else art.append(node('rect',{width:1080,height:1443,fill:role==='donor'?'#e9e8df':'#d9e9ec'}));
+  const values=Object.fromEntries(numericFields.map(id=>[id,Number($(id).value)]));
+  const {top,bottom,left,right,salutationSize,bodySize,signatureSize,lineSpacing}=values;
+  const status=$('status');
+  const validInputs=numericFields.every(id=>$(id).value!=='' && $(id).checkValidity());
+  const width=1080-left-right, height=1443-top-bottom;
+  if (!validInputs || width<120 || height<120) {
+    status.textContent='边界或字号超出可用范围，请调整数值。';status.classList.add('error');
+    $('svgSave').disabled=$('pngSave').disabled=true;return;
+  }
+  const group=node('g',{fill:role==='donor'?'#294e58':'#214d61','font-family':families[style]});
+  art.append(group);
+  const salutationY=top+salutationSize*.9;
+  group.append(node('text',{x:left,y:salutationY,'font-size':salutationSize},$('salutation').value));
+  let bodyY=salutationY+Math.max(90,salutationSize*1.8);
+  for (const line of split($('body').value)) bodyY+=wrapLine(line,group,left,bodyY,bodySize,width,lineSpacing)*lineSpacing;
+  const signature=split($('signature').value), signatureStep=Math.max(53,signatureSize*1.75);
+  const signatureStart=1443-bottom-signatureSize*.3-(signature.length-1)*signatureStep;
+  signature.forEach((line,i)=>group.append(node('text',{x:1080-right,y:signatureStart+i*signatureStep,'font-size':signatureSize,'text-anchor':'end'},line)));
+  const textNodes=[...group.querySelectorAll('text')];
+  const overflow=textNodes.some(t=>{const box=t.getBBox();return box.x<left-5 || box.x+box.width>1080-right+5 || box.y<top-1 || box.y+box.height>1443-bottom+1;});
+  const crowded=bodyY-lineSpacing+bodySize*.2>signatureStart-signatureSize-30;
+  const invalid=overflow||crowded;
+  status.textContent=invalid?'文字已超出边界或正文与落款过近，请调整边界、字号或行距。':'排版正常，可导出。';
+  status.classList.toggle('error',invalid);
+  $('svgSave').disabled=$('pngSave').disabled=invalid;
+  if ($('showGuides').checked) art.append(node('rect',{id:'guides',x:left,y:top,width,height,fill:'none',stroke:'#a44938','stroke-opacity':'.65','stroke-width':2,'stroke-dasharray':'10 8'}));
+}
+function serialized() {let copy=$('art').cloneNode(true);copy.querySelector('#guides')?.remove();copy.setAttribute('xmlns','http://www.w3.org/2000/svg');return new XMLSerializer().serializeToString(copy);}
+function download(blob,name) {let a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);}
+$('role').addEventListener('change',e=>load(e.target.value));
+$('style').addEventListener('change',draw);
+$('showGuides').addEventListener('change',draw);
+$('backgroundFile').addEventListener('change',event=>{const file=event.target.files[0];if(!file)return;if(!['image/png','image/jpeg','image/webp'].includes(file.type)){alert('请选择 PNG、JPG 或 WebP 图片。');return;}const role=$('role').value;const reader=new FileReader();reader.onload=()=>{images[role]=reader.result;imageNames[role]=file.name;$('backgroundName').textContent=file.name;draw();};reader.readAsDataURL(file);});
+$('clearBackground').addEventListener('click',()=>{const role=$('role').value;images[role]='';imageNames[role]='未选择背景图';$('backgroundFile').value='';$('backgroundName').textContent=imageNames[role];draw();});
+for(let id of [...textFields,...numericFields]) $(id).addEventListener('input',()=>{remember();draw();});
+$('body').addEventListener('keydown',event=>{if(event.key!=='Tab')return;event.preventDefault();const field=event.target,start=field.selectionStart,end=field.selectionEnd;field.setRangeText('\u3000\u3000',start,end,'end');field.dispatchEvent(new Event('input',{bubbles:true}));});
+$('reset').addEventListener('click',()=>{delete saved[$('role').value];load($('role').value);});
+$('saveDraft').addEventListener('click',()=>{remember();const draft={version:1,role:$('role').value,style:$('style').value,saved,images,imageNames};download(new Blob([JSON.stringify(draft)],{type:'application/json;charset=utf-8'}),'思源致谢信-草稿.json');});
+$('loadDraft').addEventListener('click',()=>$('draftFile').click());
+$('draftFile').addEventListener('change',async event=>{const file=event.target.files[0];if(!file)return;try{const draft=JSON.parse(await file.text());if(draft.version!==1||!draft.saved||!draft.images)throw Error('草稿格式不正确');for(const role of ['donor','mentor']){if(draft.saved[role])saved[role]=draft.saved[role];if(typeof draft.images[role]==='string')images[role]=draft.images[role];if(typeof draft.imageNames?.[role]==='string')imageNames[role]=draft.imageNames[role];}$('role').value=['donor','mentor'].includes(draft.role)?draft.role:'donor';$('style').value=families[draft.style]?draft.style:'lishu';load($('role').value);}catch(error){alert('无法打开草稿：'+error.message);}event.target.value='';});
+$('svgSave').addEventListener('click',()=>download(new Blob([serialized()],{type:'image/svg+xml;charset=utf-8'}),`思源致谢-${$('role').value}-${$('style').value}.svg`));
+$('pngSave').addEventListener('click',()=>{let blob=new Blob([serialized()],{type:'image/svg+xml;charset=utf-8'}),image=new Image(),url=URL.createObjectURL(blob);image.onload=()=>{let canvas=document.createElement('canvas');canvas.width=2160;canvas.height=2886;let ctx=canvas.getContext('2d');ctx.scale(2,2);ctx.drawImage(image,0,0);canvas.toBlob(result=>{if(result)download(result,`思源致谢-${$('role').value}-${$('style').value}.png`);else alert('PNG 导出失败，请重试。')});URL.revokeObjectURL(url)};image.onerror=()=>{URL.revokeObjectURL(url);alert('PNG 导出失败，请检查背景图片。')};image.src=url;});
+load('donor');
+</script>
+</body>
+</html>
